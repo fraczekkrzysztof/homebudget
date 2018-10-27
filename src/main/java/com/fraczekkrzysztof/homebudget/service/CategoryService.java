@@ -30,11 +30,15 @@ public class CategoryService {
 		return categoryDao.findById(id).orElse(null);
 	}
 	
-	public void save(Category category) {
-		categoryDao.save(category);
+	public Category save(Category category) {
+		return categoryDao.save(category);
 	}
 	
-	public void delete(Category category) {
-		categoryDao.delete(category);
+	public void delete(int categoryId) {
+		categoryDao.deleteById(categoryId);
+	}
+	
+	public Category findBySymbol(String categorySymbol) {
+		return categoryDao.findBySymbol(categorySymbol);
 	}
 }

@@ -16,15 +16,20 @@ public class Category {
 	@Column(name="cat_id")
 	private int id;
 	
+	@Column(name = "cat_symbol")
+	private String symbol;
+	
 	@Column(name="cat_name")
 	private String name;
+	
 	
 	public Category() {
 		
 	}
 
-	public Category(int id, String name) {
+	public Category(int id, String symbol, String name) {
 		this.id = id;
+		this.symbol = symbol;
 		this.name = name;
 	}
 
@@ -34,6 +39,15 @@ public class Category {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
 	public String getName() {
@@ -46,8 +60,10 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
+		return "Category [id=" + id + ", symbol=" + symbol + ", name=" + name + "]";
 	}
+
+	
 	
 	
 	
