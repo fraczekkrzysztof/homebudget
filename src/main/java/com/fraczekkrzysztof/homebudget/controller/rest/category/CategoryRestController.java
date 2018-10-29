@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fraczekkrzysztof.homebudget.controller.rest.exception.NotFoundException;
 import com.fraczekkrzysztof.homebudget.entity.Category;
 import com.fraczekkrzysztof.homebudget.service.CategoryService;
 
@@ -29,6 +30,11 @@ public class CategoryRestController {
 	
 	@GetMapping("/category/{categoryId}")
 	public Category getCategoryById(@PathVariable int categoryId) {
+		Category theCategory = categoryService.findOne(categoryId); 
+		if (theCategory == null) {
+			throw new NotFoundException("Category not found " + categoryId);
+		}
+		
 		return categoryService.findOne(categoryId);
 	}
 	
