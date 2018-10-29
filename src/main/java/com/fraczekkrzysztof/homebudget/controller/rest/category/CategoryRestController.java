@@ -1,4 +1,4 @@
-package com.fraczekkrzysztof.homebudget.controller;
+package com.fraczekkrzysztof.homebudget.controller.rest.category;
 
 import java.util.List;
 
