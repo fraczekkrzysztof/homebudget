@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
       <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,7 +7,7 @@
 
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-        <title>Expense Manager</title>
+        <title>Add expense</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
       </head>
 
@@ -16,38 +16,47 @@
           <a class="navbar-brand" href="#">Expense Manager</a>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#">Add expense</a>
+              <a class="nav-link active" href="#">Add expense</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Category List</a>
             </li>
           </ul>
         </nav>
+        <div class="container text-center" style="width:60%; padding-top: 50px;">
+          <form:form action="saveExpense" modelAttribute="expense" method="POST">
+            <form:hidden path="id" />
+            <!-- -->
+            <div class="form-group row">
+              <label for="description" class="col-sm-2 col-form-label">Description</label>
+              <div class="col-sm-8">
+                <form:input class="form-control" path="description" placeholder="Description" />
+              </div>
+              <div class="col-sm-2"> 
+                <form:errors path="description" style="color:red;" />
+              </div>
 
-        <div class="jumbotron" style="height:100px; padding:10px; padding-left: 50px;">
-          <h2>Expense Manager</h2>
-          <p>Simple app to manage your home budget</p>
-        </div>
-
-        <div class="container text-center" style="width: 80%">
-          <table class="table table-bordered table-hover ">
-            <thead class="thead-dark">
-              <tr>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Category</th>
-              </tr>
-            </thead>
-            <tbody>
-              <c:forEach var="tempExpense" items="${listOfExpense}">
-                <tr>
-                  <td>${tempExpense.date}</td>
-                  <td>${tempExpense.description}</td>
-                  <td>${tempExpense.category.name}</td>
-                </tr>
-              </c:forEach>
-            </tbody>
-          </table>
+            </div>
+            <!-- -->
+            <div class="form-group row">
+              <label for="category" class="col-sm-2 col-form-label">Category</label>
+              <div class="col-sm-10">
+                <form:select class="custom-select" path="categoryId">
+                  <form:option value="-1" label="---chooseOne---" />
+                  <form:options items="${categories}" />
+                </form:select>
+              </div>
+            </div>
+            <!-- -->
+            <div class="form-group row">
+              <label for="date" class="col-sm-2 col-form-label">Date</label>
+              <div class="col-sm-10">
+                <form:input type="date" class="form-control" path="description" placeholder="Description" />
+              </div>
+            </div>
+            <!-- -->
+            <input type="submit" value="Save" class="btn btn-primary" />
+          </form:form>
         </div>
         <!-- Bootstrap js-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
