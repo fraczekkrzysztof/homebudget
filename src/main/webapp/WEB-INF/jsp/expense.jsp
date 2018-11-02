@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+      <%@ taglib prefix = "fmt"  uri = "http://java.sun.com/jsp/jstl/fmt"  %>
       <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
       <html>
 
@@ -16,7 +17,10 @@
           <a class="navbar-brand" href="#">Expense Manager</a>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#">Add expense</a>
+              <a class="nav-link disabled" href="${pageContext.request.contextPath}/expense">Expense List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="${pageContext.request.contextPath}/showFormForAdd">Add expense</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Category List</a>
@@ -28,7 +32,9 @@
           <h2>Expense Manager</h2>
           <p>Simple app to manage your home budget</p>
         </div>
-
+        <div class="container text-center" style="width: 80% padding-top:10px; padding-bottom: 10px; color:red; font-weight: bold">
+          ${addSucces}
+        </div>
         <div class="container text-center" style="width: 80%">
           <table class="table table-bordered table-hover ">
             <thead class="thead-dark">
@@ -41,7 +47,7 @@
             <tbody>
               <c:forEach var="tempExpense" items="${listOfExpense}">
                 <tr>
-                  <td>${tempExpense.date}</td>
+                  <td><fmt:formatDate pattern="dd.MM.yyyy" value="${tempExpense.date}" /></td>
                   <td>${tempExpense.description}</td>
                   <td>${tempExpense.category.name}</td>
                 </tr>

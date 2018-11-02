@@ -16,14 +16,20 @@
           <a class="navbar-brand" href="#">Expense Manager</a>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Add expense</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/expense">Expense List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="${pageContext.request.contextPath}/showFormForAdd">Add expense</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Category List</a>
             </li>
           </ul>
         </nav>
-        <div class="container text-center" style="width:60%; padding-top: 50px;">
+        <div class="container text-center" style="width:60%; padding-top:10px; padding-bottom: 10px; color:red; font-weight: bold">
+          ${addError}
+        </div>
+        <div class="container text-center" style="width:60%;">
           <form:form action="saveExpense" modelAttribute="expense" method="POST">
             <form:hidden path="id" />
             <!-- -->
@@ -40,18 +46,24 @@
             <!-- -->
             <div class="form-group row">
               <label for="category" class="col-sm-2 col-form-label">Category</label>
-              <div class="col-sm-10">
+              <div class="col-sm-8">
                 <form:select class="custom-select" path="categoryId">
                   <form:option value="-1" label="---chooseOne---" />
                   <form:options items="${categories}" />
                 </form:select>
               </div>
+              <div class="col-sm-2"> 
+                <form:errors path="categoryId" style="color:red;" />
+              </div>
             </div>
             <!-- -->
             <div class="form-group row">
               <label for="date" class="col-sm-2 col-form-label">Date</label>
-              <div class="col-sm-10">
-                <form:input type="date" class="form-control" path="description" placeholder="Description" />
+              <div class="col-sm-8">
+                <form:input type="date" class="form-control" path="date" placeholder="Description" />
+              </div>
+              <div class="col-sm-2"> 
+                <form:errors path="date" style="color:red;" />
               </div>
             </div>
             <!-- -->

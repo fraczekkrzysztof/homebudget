@@ -1,23 +1,25 @@
 package com.fraczekkrzysztof.homebudget.dto;
 
-import java.util.Date;
-
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class ExpenseDto {
 	private int id;
 	@NotNull(message="Description is required")
-	@Size(min=10, message="Description is required")
+	@Size(min=1, message="Description is required")
 	private String description;
-	private Date date;
+	@NotNull(message="Date is required")
+	@Size(min=1, message="Date is required")
+	private String date;
+	@Min(value=1L, message="Category is required")
 	private int categoryId;
 	
 	public ExpenseDto() {
 		
 	}
 
-	public ExpenseDto(int id, String description, Date date, int categoryId) {
+	public ExpenseDto(int id, String description, String date, int categoryId) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -43,11 +45,11 @@ public class ExpenseDto {
 		this.description = description;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
