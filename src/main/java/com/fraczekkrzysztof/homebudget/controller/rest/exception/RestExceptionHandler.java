@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class RestExceptionHandler {
 
 	@ExceptionHandler
-	public ResponseEntity<RestErrorResponse> handleException(NotFoundException exc){
-		RestErrorResponse error = new RestErrorResponse(HttpStatus.NOT_FOUND.value(),exc.getMessage(),System.currentTimeMillis());
+	public ResponseEntity<RestErrorResponse> handleException(NotFoundException exc) {
+		RestErrorResponse error = new RestErrorResponse(HttpStatus.NOT_FOUND.value(), exc.getMessage(),
+				System.currentTimeMillis());
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@ExceptionHandler
-	public ResponseEntity<RestErrorResponse> handleException(Exception exc){
-		RestErrorResponse error = new RestErrorResponse(HttpStatus.BAD_REQUEST.value(),exc.getMessage(),System.currentTimeMillis());
+	public ResponseEntity<RestErrorResponse> handleException(Exception exc) {
+		RestErrorResponse error = new RestErrorResponse(HttpStatus.BAD_REQUEST.value(), exc.getMessage(),
+				System.currentTimeMillis());
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-	}
+}
 }

@@ -16,13 +16,16 @@
           <a class="navbar-brand" href="#">Expense Manager</a>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="${pageContext.request.contextPath}/expense">Expense List</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/expense/list">Expense List</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" href="${pageContext.request.contextPath}/showFormForAdd">Add expense</a>
+              <a class="nav-link disabled" href="${pageContext.request.contextPath}/expense/showFormForAdd">Add expense</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Category List</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/category/list">Category List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="${pageContext.request.contextPath}/category/showFormForAdd">Add Category</a>
             </li>
           </ul>
         </nav>

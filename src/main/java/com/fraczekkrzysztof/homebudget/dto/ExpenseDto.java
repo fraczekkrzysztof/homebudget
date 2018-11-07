@@ -1,10 +1,12 @@
 package com.fraczekkrzysztof.homebudget.dto;
 
 import javax.validation.constraints.Min;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class ExpenseDto {
+	
 	private int id;
 	@NotNull(message="Description is required")
 	@Size(min=1, message="Description is required")

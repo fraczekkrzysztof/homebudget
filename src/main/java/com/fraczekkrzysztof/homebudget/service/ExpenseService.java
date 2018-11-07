@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fraczekkrzysztof.homebudget.dao.ExpenseDao;
 import com.fraczekkrzysztof.homebudget.entity.Expense;
+import com.fraczekkrzysztof.homebudget.wrapper.ExpenseWrapper;
 
 @Service
 public class ExpenseService {
@@ -22,6 +23,13 @@ public class ExpenseService {
 		}
 		return listExpense;
 	}
+	public List<ExpenseWrapper> findAllWrapped(){
+		List<ExpenseWrapper> listExpenseWrapped = new ArrayList<ExpenseWrapper>();
+		for (Expense exp: expenseDao.findAll()){
+			listExpenseWrapped.add(new ExpenseWrapper(false,exp));
+		}
+		return listExpenseWrapped;
+	}
 	
 	public Expense findOne(int id) {
 		return expenseDao.findById(id).orElse(null);
@@ -34,4 +42,5 @@ public class ExpenseService {
 	public void deleteExpense(int expenseId) {
 		expenseDao.deleteById(expenseId);
 	}
+	
 }

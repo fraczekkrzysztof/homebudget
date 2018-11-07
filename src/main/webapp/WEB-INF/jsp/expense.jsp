@@ -17,13 +17,16 @@
           <a class="navbar-brand" href="#">Expense Manager</a>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link disabled" href="${pageContext.request.contextPath}/expense">Expense List</a>
+              <a class="nav-link disabled" href="${pageContext.request.contextPath}/expense/list">Expense List</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="${pageContext.request.contextPath}/showFormForAdd">Add expense</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/expense/showFormForAdd">Add expense</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Category List</a>
+              <a class="nav-link" href="${pageContext.request.contextPath}/category/list">Category List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="${pageContext.request.contextPath}/category/showFormForAdd">Add Category</a>
             </li>
           </ul>
         </nav>
@@ -34,27 +37,39 @@
         </div>
         <div class="container text-center" style="width: 80% padding-top:10px; padding-bottom: 10px; color:red; font-weight: bold">
           ${addSucces}
+          ${deleteSucces}
+          ${updateSucces}
         </div>
+        <form:form action="deleteSelectedExpense" modelAttribute="listOfExpense" method="POST">
         <div class="container text-center" style="width: 80%">
+          <div class="container text-left" style="margin-bottom: 30px">
+          <input type="submit" value="Dalete Selected" class="btn btn-primary" />
+          </div>
           <table class="table table-bordered table-hover ">
             <thead class="thead-dark">
               <tr>
+                <th>Select</th> 
                 <th>Date</th>
                 <th>Description</th>
                 <th>Category</th>
+                <th>Operation</th>
               </tr>
             </thead>
             <tbody>
               <c:forEach var="tempExpense" items="${listOfExpense}">
                 <tr>
-                  <td><fmt:formatDate pattern="dd.MM.yyyy" value="${tempExpense.date}" /></td>
-                  <td>${tempExpense.description}</td>
-                  <td>${tempExpense.category.name}</td>
+                  <td><form:checkbox value="true" path="${isSelected}"/></td>      
+                  <td><fmt:formatDate pattern="dd.MM.yyyy" value="${tempExpense.expense.date}" /></td>
+                  <td>${tempExpense.expense.description}</td>
+                  <td>${tempExpense.expense.category.name}</td>
+                  <td><a href="deleteExpense?expenseId=${tempExpense.expense.id}">Delete</a> ||
+                    <a href="showFormForUpdate?expenseId=${tempExpense.expense.id}">Update</a></td>
                 </tr>
               </c:forEach>
             </tbody>
           </table>
         </div>
+        </form:form>
         <!-- Bootstrap js-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

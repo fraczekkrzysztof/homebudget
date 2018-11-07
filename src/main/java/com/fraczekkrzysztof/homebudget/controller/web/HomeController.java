@@ -8,6 +8,7 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String hello() {
-		return "index";
+		return "redirect:/expense/list";
 	}
+	
 }
