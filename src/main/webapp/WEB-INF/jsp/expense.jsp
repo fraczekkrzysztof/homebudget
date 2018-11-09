@@ -17,16 +17,11 @@
             function drawChart() {
 
               var data = new google.visualization.DataTable();
-              data.addColumn('string', 'Topping');
-              data.addColumn('number', 'Slices');
-              data.addRow(['BLADDS',2]);
-              data.addRows([
-                ['Mushrooms', 3],
-                ['Onions', 1],
-                ['Olives', 1], 
-                ['Zucchini', 1],
-                ['Pepperoni', 2]
-              ]);
+              data.addColumn('string', 'Category');
+              data.addColumn('number', 'Amount');
+              <c:forEach var="stat" items="${expenseStatistic}">
+                data.addRow(['${stat.categoryName}',${stat.cnt}]);
+              </c:forEach>
               var options = {
                 title: 'My Daily Activities'
               };

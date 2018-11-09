@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fraczekkrzysztof.homebudget.dao.ExpenseDao;
 import com.fraczekkrzysztof.homebudget.entity.Expense;
-import com.fraczekkrzysztof.homebudget.wrapper.ExpenseWrapper;
+import com.fraczekkrzysztof.homebudget.helper.ExpenseStatistic;
 
 @Service
 public class ExpenseService {
@@ -34,6 +34,10 @@ public class ExpenseService {
 	
 	public void deleteExpense(int expenseId) {
 		expenseDao.deleteById(expenseId);
+	}
+	
+	public List<ExpenseStatistic> getExpenseStatistic(){
+		return expenseDao.getExpenseStatistic();
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.fraczekkrzysztof.homebudget.controller.web;
 
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -23,10 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fraczekkrzysztof.homebudget.dto.ExpenseDto;
 import com.fraczekkrzysztof.homebudget.entity.Category;
 import com.fraczekkrzysztof.homebudget.entity.Expense;
-import com.fraczekkrzysztof.homebudget.list.ListObject;
 import com.fraczekkrzysztof.homebudget.service.CategoryService;
 import com.fraczekkrzysztof.homebudget.service.ExpenseService;
-import com.fraczekkrzysztof.homebudget.wrapper.ExpenseWrapper;
 
 @Controller
 @RequestMapping("/expense")
@@ -50,6 +49,7 @@ public class ExpenseController {
 	@GetMapping("/list")
 	public String getAllExpenses(Model theModel) {
 		theModel.addAttribute("listOfExpense", expenseService.findAll());
+		theModel.addAttribute("expenseStatistic",expenseService.getExpenseStatistic());
 		// after add get confirmation message
 		String addMessage = getMessage("addSucces");
 		if (!(addMessage == null)) {
