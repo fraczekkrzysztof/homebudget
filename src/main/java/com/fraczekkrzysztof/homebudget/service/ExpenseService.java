@@ -23,13 +23,6 @@ public class ExpenseService {
 		}
 		return listExpense;
 	}
-	public List<ExpenseWrapper> findAllWrapped(){
-		List<ExpenseWrapper> listExpenseWrapped = new ArrayList<ExpenseWrapper>();
-		for (Expense exp: expenseDao.findAll()){
-			listExpenseWrapped.add(new ExpenseWrapper(false,exp));
-		}
-		return listExpenseWrapped;
-	}
 	
 	public Expense findOne(int id) {
 		return expenseDao.findById(id).orElse(null);
