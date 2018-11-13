@@ -1,14 +1,16 @@
 package com.fraczekkrzysztof.homebudget.controller.web;
 
 import java.text.ParseException;
-
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,7 @@ public class ExpenseController {
 	public String getAllExpenses(Model theModel) {
 		theModel.addAttribute("listOfExpense", expenseService.findAll());
 		theModel.addAttribute("expenseStatistic",expenseService.getExpenseStatistic());
+		theModel.addAttribute("listOfCategory",categoryService.findAll());
 		// after add get confirmation message
 		String addMessage = getMessage("addSucces");
 		if (!(addMessage == null)) {
@@ -141,5 +144,24 @@ public class ExpenseController {
 		messages.put("deleteMultipleSucces", "The Expenses was succesfully deleted");
 		return "redirect:/expense/list";
 	}
+	
+	@GetMapping("/findExpense")
+	public String getFilteredExpense(@RequestParam("from") String from, @RequestParam("to") String to, @RequestParam("categoryid") int categoryId, Model theModel) throws ParseException {
+		Date dateTo = null;
+		Date dateFrom = null;
+		if (!(to==null)) {
+			dateTo = sdf.parse(to);
+		}
+		if (!(from==null)) {
+			dateFrom = sdf.parse(from);
+		}
+		theModel.addAttribute("listOfExpense", expenseService.getFilteredExpense(categoryId, dateFrom, dateTo));
+		theModel.addAttribute("expenseStatistic",expenseService.getFilteredStatistic(categoryId, dateFrom, dateTo));
+		theModel.addAttribute("listOfCategory",categoryService.findAll());
+		return "expense";
+	}
 
+	
 }
+
+

@@ -1,6 +1,7 @@
 package com.fraczekkrzysztof.homebudget.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,17 @@ public class ExpenseService {
 	
 	public List<ExpenseStatistic> getExpenseStatistic(){
 		return expenseDao.getExpenseStatistic();
+	}
+	
+	public List<Expense> getFilteredExpense(int id, Date from, Date to){
+		return expenseDao.getFilteredExpense(id, from, to);
+	}
+	public List<Expense> getFilteredExpense2(int id){
+		return expenseDao.getFilteredExpense2(id);
+	}
+	
+	public List<ExpenseStatistic> getFilteredStatistic(int id, Date from, Date to){
+		return expenseDao.getFilteredStatistic(id, from, to);
 	}
 	
 }

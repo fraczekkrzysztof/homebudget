@@ -11,16 +11,18 @@
           <title>Expense Manager</title>
           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
           <script type="text/javascript">
-            google.charts.load('current', {'packages':['corechart']});
+            google.charts.load('current', {
+              'packages': ['corechart']
+            });
             google.charts.setOnLoadCallback(drawChart);
 
             function drawChart() {
 
               var data = new google.visualization.DataTable();
               data.addColumn('string', 'Category');
-              data.addColumn('number', 'Amount');
-              <c:forEach var="stat" items="${expenseStatistic}">
-                data.addRow(['${stat.categoryName}',${stat.cnt}]);
+              data.addColumn('number', 'Amount'); 
+              <c:forEach var = "stat" items = "${expenseStatistic}" >
+                data.addRow(['${stat.categoryName}', ${stat.cnt}]); 
               </c:forEach>
               var options = {
                 title: 'My Daily Activities'
@@ -30,6 +32,7 @@
 
               chart.draw(data, options);
             }
+
           </script>
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         </head>
@@ -60,7 +63,33 @@
           <div class="container text-center" style="width: 80% padding-top:10px; padding-bottom: 10px; color:red; font-weight: bold">
             ${addSucces} ${deleteSucces} ${updateSucces}
           </div>
-          <form action="deleteSelectedExpense" method = "GET">
+          <div class="container" style="width: 80% padding-top:10px; padding-bottom: 10px;">
+            <form action="findExpense" method="GET">
+              <div class="form-group row">
+               <div class="col">
+                  <label for="from">From</label> 
+                  <input class="form-control" type=date name="from" placeholder="from" />
+               </div>
+              <div class="col">
+                <label for="from">To</label>                
+                <input class="form-control" type=date name="to" placeholder="to" />
+              </div>
+                <div class="col">
+                  <label for="from">Category</label>
+                  <select class="form-control" name="categoryid">
+                    <option value="-1"></option>
+                    <c:forEach var="tempCat" items="${listOfCategory}">
+                      <option value="${tempCat.id}">${tempCat.symbol}</option>
+                    </c:forEach>
+                  </select>
+                </div>  
+              </div>
+              <div class="text-right">
+                <button class="btn btn-primary">Search</button>
+              </div>
+            </form>
+          </div>
+          <form action="deleteSelectedExpense" method="GET">
             <div class="container text-center" style="width: 80%">
               <div class="container text-left" style="margin-bottom: 10px">
                 <button class="btn btn-primary">Delete selected</button>
@@ -79,7 +108,7 @@
                   <c:forEach var="tempExpense" items="${listOfExpense}">
                     <tr>
                       <td>
-                        <input type=Checkbox name="expenseid" value="${tempExpense.id}"/>
+                        <input type=Checkbox name="expenseid" value="${tempExpense.id}" />
                       </td>
                       <td>
                         <fmt:formatDate pattern="dd.MM.yyyy" value="${tempExpense.date}" />
@@ -94,7 +123,7 @@
               </table>
             </div>
           </form>
-          <div class="container"id="piechart" style="width: 900px; height: 500px;"></div>
+          <div class="container" id="piechart" style="width: 900px; height: 500px;"></div>
           <!-- Bootstrap js-->
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
