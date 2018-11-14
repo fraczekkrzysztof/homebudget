@@ -77,6 +77,11 @@ public class Expense {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
+	public int getColumnCount() {
+
+        return getClass().getDeclaredFields().length;
+    }
 
 	@Override
 	public String toString() {
