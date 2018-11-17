@@ -123,6 +123,11 @@
               </table>
             </div>
           </form>
+          <div class="container" id="export" style="width:80%">
+            <form action="download" method="GET">
+              <button class="btn btn-primary">Download all expenses</button>
+            </form>
+          </div>
           <div class="container" id="piechart" style="width: 900px; height: 500px;"></div>
           <!-- Bootstrap js-->
           <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
